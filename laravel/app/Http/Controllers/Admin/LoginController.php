@@ -13,6 +13,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         if ($request->isMethod('post')) {
+            //获取用户填写的信息
             $data = $request->all();
             $rules = ['captcha' => 'required|captcha'];
             $message = [

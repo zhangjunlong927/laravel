@@ -22,5 +22,5 @@ Route::post('/form', 'Admin\IndexController@form');
 Route::get('index/add', 'Admin\IndexController@index');
 
 Route::get('test/test', 'Admin\TestController@test');
-
+//
 Route::any('/login/login', 'Admin\LoginController@login');

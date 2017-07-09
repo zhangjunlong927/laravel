@@ -15,6 +15,7 @@ class LoginController extends Controller
         if ($request->isMethod('post')) {
             //获取用户填写的信息
             $data = $request->all();
+            //设置验证码的 验证规则
             $rules = ['captcha' => 'required|captcha'];
             $message = [
                 'captcha.required' => '验证码必须填写',

@@ -30,6 +30,7 @@ class LoginController extends Controller
                 //调用模型层验证
                 $info = UserModel::login($data['name'], $data['password']);
                 if ($info === true) {
+                    //重定向
                     return redirect()->to('/');
                 } else {
                     return back()->with('msg', $info);

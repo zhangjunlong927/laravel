@@ -42,6 +42,7 @@ class LoginController extends Controller
     //退出登录
     public function logout()
     {
+        //调用认证方法
         Auth::guard('admin')->logout();
         return redirect('/login/login');
     }

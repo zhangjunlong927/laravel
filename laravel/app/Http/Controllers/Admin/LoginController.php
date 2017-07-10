@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Model\UserModel;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     //登录
@@ -18,7 +18,6 @@ class LoginController extends Controller
             //设置验证码的 验证规则
             $rules = ['captcha' => 'required|captcha'];
             $message = [
-                'captcha.required' => '验证码必须填写',
                 'captcha.captcha' => '验证码输入错误'
             ];
             $validator = Validator::make($data, $rules, $message);
@@ -27,17 +26,23 @@ class LoginController extends Controller
                 return back()->withErrors($validator);
             } else {
                 //验证码正确进行下面的验证
-                //调用模型层验证
-                $info = UserModel::login($data['name'], $data['password']);
-                if ($info === true) {
-                    //重定向
-                    return redirect()->to('/');
+                $auth = Auth::guard('admin')->attempt(['name' => $data['name'], 'password' => $data['password']]);
+                if ($auth) {
+                    return redirect('/admin/index');
                 } else {
-                    return back()->with('msg', $info);
+                    return back()->withErrors('用户名或密码错误!');
+                    //return view('admin.login')->with('errorMsg','用户名或者密码错误!')
                 }
             }
         }
         //加载登录页面
         return view('admin.login');
+    }
+
+    //退出登录
+    public function logout()
+    {
+        Auth::guard('admin')->logout();
+        return redirect('/login/login');
     }
 }

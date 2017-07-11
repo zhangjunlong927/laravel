@@ -76,12 +76,12 @@ return [
         ],
 
         // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'driver' => 'database', //指定操作数据库的方式
+        //     'table' => 'users',      //表名
         // ],
         'admin' => [
-            'driver' => 'eloquent',
-            'model' => App\Http\Model\UserModel::class,
+            'driver' => 'eloquent',  //指定操作数据库的方式
+            'model' => App\Http\Model\UserModel::class,  //指定模型名(表名s)
         ],
     ],
 

@@ -27,5 +27,7 @@ Route::group(['middleware' => 'auth:admin'], function () {
     Route::get('/admin/welcome', 'Admin\IndexController@welcome');
     //退出
     Route::get('/login/logout', 'Admin\LoginController@logout');
+    //品牌展示
+    Route::get('/admin/brandLst', 'Admin\BrandController@brandLst');
 });
 
